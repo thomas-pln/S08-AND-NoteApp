@@ -10,20 +10,13 @@ import com.eseo.noteapp.model.entity.Note
 
 @Dao
 interface NoteDao {
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNote(note: Note)
-
     @Query("SELECT * FROM note")
     fun getAllNotes() : LiveData<List<Note>>
-
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertNote(note: Note)
+    @Update(entity = Note::class, onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateNote(note: Note)
     @Query("DELETE FROM note WHERE id = :id")
     suspend fun deleteNote(id : Int)
-
-    @Update(
-        entity = Note::class,
-        onConflict = OnConflictStrategy.REPLACE
-    )
-    suspend fun updateNote(note: Note)
 
 }

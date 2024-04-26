@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.eseo.noteapp.R
@@ -23,6 +24,7 @@ class AddActivity : AppCompatActivity() {
 
             val replyIntent = Intent()
             if (TextUtils.isEmpty(binding.titleEdit.text) || TextUtils.isEmpty(binding.textEdit.text)) {
+                Toast.makeText(applicationContext, "Both fields must be filled", Toast.LENGTH_LONG).show()
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else {
 

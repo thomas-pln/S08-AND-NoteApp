@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.eseo.noteapp.R
 import com.eseo.noteapp.model.entity.Note
@@ -72,6 +73,7 @@ class NoteAdapter(
 
             deleteNoteImage.setOnClickListener {
                 noteViewModel.deleteNote(note.id)
+                Toast.makeText(itemView.context, "Note has been deleted", Toast.LENGTH_SHORT).show()
             }
         }
     }

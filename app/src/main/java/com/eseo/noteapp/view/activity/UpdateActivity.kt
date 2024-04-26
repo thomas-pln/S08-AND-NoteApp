@@ -1,5 +1,6 @@
 package com.eseo.noteapp.view.activity
 
+import android.app.Activity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
@@ -28,9 +29,21 @@ class UpdateActivity : AppCompatActivity() {
         val note : Note = intent.getSerializableExtra("UPDATE") as Note
         binding.titleEdit.setText(note.title)
         binding.textEdit.setText(note.text)
-        note.title = binding.titleEdit.text.toString()
-        note.text = binding.textEdit.text.toString()
-        noteViewModel.updateNote(note)
 
+        binding.confirmButton.setOnClickListener {
+            if (TextUtils.isEmpty(binding.titleEdit.text) || TextUtils.isEmpty(binding.textEdit.text)) {
+                Toast.makeText(applicationContext, "Both fields must be filled", Toast.LENGTH_LONG).show()
+            } else {
+                note.title = binding.titleEdit.text.toString()
+                note.text = binding.textEdit.text.toString()
+                noteViewModel.updateNote(note)
+                finish()
+            }
+        }
+
+        binding.cancelButton.setOnClickListener {
+            setResult(Activity.RESULT_CANCELED)
+            finish()
+        }
     }
 }
