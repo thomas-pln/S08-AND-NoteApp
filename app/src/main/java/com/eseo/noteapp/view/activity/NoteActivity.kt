@@ -17,6 +17,14 @@ import com.eseo.noteapp.view.adapter.NoteAdapter
 import com.eseo.noteapp.viewmodel.NoteViewModel
 import com.eseo.noteapp.viewmodel.NoteViewModelFactory
 
+/**
+ * Activity for displaying and managing notes.
+ *
+ * @property newNoteActivityRequestCode The request code for starting the AddActivity.
+ * @property noteViewModel The ViewModel that is used to interact with the data layer.
+ * @property binding The binding object that gives access to the views in the layout.
+ * @property noteAdapter The adapter that is used to display the notes in a RecyclerView.
+ */
 class NoteActivity : AppCompatActivity() {
 
     private val newNoteActivityRequestCode = 1
@@ -28,6 +36,11 @@ class NoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNoteBinding
     private lateinit var noteAdapter: NoteAdapter
 
+    /**
+     * Called when the activity is starting.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle). Note: Otherwise it is null.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -47,7 +60,9 @@ class NoteActivity : AppCompatActivity() {
         }
     }
 
-
+    /**
+     * Sets up the RecyclerView that is used to display the notes.
+     */
     private fun setNoteRecycler() {
         binding.noteRecycler.apply {
             adapter = noteAdapter
@@ -56,6 +71,13 @@ class NoteActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Called when an activity you launched exits, giving you the requestCode you started it with, the resultCode it returned, and any additional data from it.
+     *
+     * @param requestCode The integer request code originally supplied to startActivityForResult(), allowing you to identify who this result came from.
+     * @param resultCode The integer result code returned by the child activity through its setResult().
+     * @param intentData An Intent, which can return result data to the caller (various data can be attached to Intent "extras").
+     */
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
         super.onActivityResult(requestCode, resultCode, intentData)

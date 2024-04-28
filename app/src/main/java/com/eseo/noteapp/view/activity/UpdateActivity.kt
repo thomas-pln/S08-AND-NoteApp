@@ -14,6 +14,12 @@ import com.eseo.noteapp.model.entity.Note
 import com.eseo.noteapp.viewmodel.NoteViewModel
 import com.eseo.noteapp.viewmodel.NoteViewModelFactory
 
+/**
+ * Activity for updating an existing note.
+ *
+ * @property binding The binding object that gives access to the views in the layout.
+ * @property noteViewModel The ViewModel that is used to interact with the data layer.
+ */
 class UpdateActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUpdateBinding
@@ -21,6 +27,11 @@ class UpdateActivity : AppCompatActivity() {
         NoteViewModelFactory((application as NoteApplication).repository)
     }
 
+    /**
+     * Called when the activity is starting.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle). Note: Otherwise it is null.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,6 +41,7 @@ class UpdateActivity : AppCompatActivity() {
         binding.titleEdit.setText(note.title)
         binding.textEdit.setText(note.text)
 
+        // Set a click listener for the confirm button
         binding.confirmButton.setOnClickListener {
             if (TextUtils.isEmpty(binding.titleEdit.text) || TextUtils.isEmpty(binding.textEdit.text)) {
                 Toast.makeText(applicationContext, "Both fields must be filled", Toast.LENGTH_LONG).show()
@@ -41,6 +53,7 @@ class UpdateActivity : AppCompatActivity() {
             }
         }
 
+        // Set a click listener for the cancel button
         binding.cancelButton.setOnClickListener {
             setResult(Activity.RESULT_CANCELED)
             finish()
